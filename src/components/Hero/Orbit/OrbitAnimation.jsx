@@ -5,7 +5,7 @@ export function OrbitingCircles({
   children,
   reverse,
   duration = 20,
-  radius = 160,
+  radius = 180,
   path = true,
   iconSize = 30,
   speed = 1,
@@ -21,7 +21,8 @@ export function OrbitingCircles({
           className="pointer-events-none absolute inset-0 size-full"
         >
           <circle
-            className="stroke-black/10 stroke-1 dark:stroke-white/10"
+            stroke="orange"
+            stroke-width="2"
             cx="50%"
             cy="50%"
             r={radius}
@@ -51,3 +52,5 @@ export function OrbitingCircles({
     </>
   );
 }
+
+export default OrbitingCircles;
