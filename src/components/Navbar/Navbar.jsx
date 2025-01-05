@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CiSearch, CiShoppingBasket, CiUser } from 'react-icons/ci';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const menuItems = ['Home', 'Websites', 'About', 'Coming Soon...'];
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full border-b border-gray-600   z-50">
+    <nav className="fixed top-0 left-0 w-full border-b border-gray-600 z-50 bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="text-2xl font-bold bg-clip-text text-transparent bg-emerald-400">
             <i className="fas fa-globe-americas text-red-500"></i> GlideSphere
           </div>
 
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden flex items-center">
+            <button onClick={toggleMenu} className="text-white text-2xl">
+              {isOpen ? <FaTimes /> : <FaBars />}
+            </button>
+          </div>
+
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className={`hidden md:flex items-center space-x-6`}>
             {menuItems.map((item, index) => (
               <span
                 key={index}
@@ -41,6 +54,34 @@ const Navbar = () => {
                 Contact Us
               </button>
             </a>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-gray-700`}>
+          <div className="space-y-4 py-4">
+            {menuItems.map((item, index) => (
+              <div
+                key={index}
+                className="text-white text-center py-2 cursor-pointer hover:bg-gray-600">
+                {item}
+              </div>
+            ))}
+            <div className="flex justify-center space-x-4">
+              {[CiSearch, CiShoppingBasket, CiUser].map((Icon, idx) => (
+                <Icon
+                  key={idx}
+                  className="text-white text-xl cursor-pointer hover:text-purple-500 transition duration-300"
+                />
+              ))}
+            </div>
+            <div className="text-center">
+              <a href="https://hexagondigitalservices.com/contact">
+                <button className="text-sm bg-gradient-to-r from-green-400 to-red-500 text-white px-4 py-2 rounded-full hover:opacity-90 shadow-lg transition duration-300">
+                  Contact Us
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
